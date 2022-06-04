@@ -25,7 +25,8 @@ Route::prefix('v1')->group(function (){
 
     Route::middleware('auth:api')->group(function () {
         Route::prefix('user')->group(function (){
-            Route::get('/', [UserController::class, 'getCurrentUser']);      
+            Route::get('/', [UserController::class, 'getCurrentUser']);
+            Route::put('/', [UserController::class, 'update']);      
         });
 
         Route::prefix('lophoc')->group(function (){  

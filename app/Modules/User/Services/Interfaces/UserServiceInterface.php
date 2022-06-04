@@ -7,4 +7,5 @@ interface UserServiceInterface
     public function login($request);
     public function register($request);
     public function getCurrentUser();
+    public function update($request);
 }

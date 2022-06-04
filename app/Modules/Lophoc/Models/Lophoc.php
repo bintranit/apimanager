@@ -18,6 +18,6 @@ class Lophoc extends Model
     
     public function lophocs()
     {
-        return $this->hasMany(Employee::class, 'company_id', 'id');
+        return $this->hasMany(Thanhvien::class, 'lophoc_id', 'id');
     }
 }

@@ -4,7 +4,6 @@ namespace App\Modules\Lophoc\Repositories;
 
 use App\Modules\Lophoc\Models\Lophoc;
 use App\Modules\Lophoc\Repositories\Interfaces\LophocRepositoryInterface;
-// use App\Modules\Employee\Models\Employee;
 
 class LophocRepository implements LophocRepositoryInterface
 {

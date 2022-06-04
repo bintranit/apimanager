@@ -32,6 +32,7 @@ class LophocService implements LophocServiceInterface
     {
         try {
             $validated = $request->validated();
+            
             $lophoc = $this->lophocRepository->create($validated);
             return $this->transformerReponse->response(
                 false,

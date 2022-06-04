@@ -137,5 +137,76 @@ class UserService implements UserServiceInterface
                 TransformerResponse::INTERNAL_SERVER_ERROR_MESSAGE,
             );
     }
-}
+    }
+
+    public function update($request) 
+    {
+        
+        // try { 
+        //     $user = $this->userRepository->getById($id);
+        //     if(empty($user)) 
+        //         return $this->transformerReponse->response(
+        //             true,
+        //             [],
+        //             TransformerResponse::HTTP_NOT_FOUND,
+        //             TransformerResponse::NOT_FOUND_MESSAGE,
+        //         );
+            
+        //         $data = [
+        //             'password' => $user["password"],
+        //             'email' => $user["email"],  
+        //         ];
+              
+        //     $this->userRepository->update($data, $id);
+
+        //     return $this->transformerReponse->response(
+        //         false,
+        //         [
+        //             'user' => $data, 
+        //         ],
+        //         TransformerResponse::HTTP_OK, 
+        //         TransformerResponse::UPDATE_SUCCESS_MESSAGE
+                
+        // );
+            
+        // } catch (QueryException $exception) {
+        //     return $this->transformerReponse->response(
+        //         true,
+        //         [],
+        //         TransformerResponse::HTTP_INTERNAL_SERVER_ERROR,
+        //         TransformerResponse::INTERNAL_SERVER_ERROR_MESSAGE,
+        //     );
+        // } catch (ModelNotFoundException $exception) {
+        //     return $this->transformerReponse->response(
+        //         true,
+        //         [],
+        //         TransformerResponse::HTTP_NOT_FOUND,
+        //         TransformerResponse::NOT_FOUND_MESSAGE,
+        //     );
+        // }
+
+        try {
+            $validated = $request->validated();
+            $data = $validated['password'];
+            $data = bcrypt($data);
+            $user = auth()->user();
+            $this->userRepository->update($user['id'], $data);
+            return $this->transformerReponse->response(
+                false,
+                [
+                    'user' => $user,
+                ],
+                TransformerResponse::HTTP_OK,
+                TransformerResponse::GET_SUCCESS_MESSAGE
+
+            );
+        } catch (QueryException $exception) {
+            return $this->transformerReponse->response(
+                true,
+                [],
+                TransformerResponse::HTTP_INTERNAL_SERVER_ERROR,
+                TransformerResponse::INTERNAL_SERVER_ERROR_MESSAGE,
+            );
+    }
+    }
 }

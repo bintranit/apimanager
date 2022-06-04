@@ -5,6 +5,7 @@ namespace App\Modules\User\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\User\Requests\UserLoginRequest;
 use App\Modules\User\Requests\UserRegisterRequest;
+use App\Modules\User\Requests\UserUpdateRequest;
 use App\Modules\User\Services\Interfaces\UserServiceInterface;
 
 class UserController extends Controller 
@@ -42,5 +43,10 @@ class UserController extends Controller
     public function getCurrentUser()
     {
         return $this->userService->getCurrentUser();
+    }
+
+    public function update(UserUpdateRequest $request)
+    {
+        return $this->userService->update($request);
     }
 }
